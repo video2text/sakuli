@@ -201,4 +201,4 @@ Version History
 
 Legal Notice
 -----------
-This API documentation is provided for informational purposes. Usage of the RTA Dubai Bus Journey Planner API is subject to RTA's terms of service and data usage policies.
+This API documentation is provided for informational purposes. Usage of the `RTA Dubai Bus Timing <https://uaetiming.com/your-complete-guide-to-rta-bus-routes-in-dubai/>`_ and Journey Planner API is subject to RTA's terms of service and data usage policies.
