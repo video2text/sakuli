@@ -2,7 +2,7 @@ RTA Dubai Bus Journey Planner API
 ^^^^^^^^
 Overview
 
-The RTA Dubai Bus Journey Planner API provides access to real-time bus schedules and timetables for Dubai's public transportation system. This documentation outlines the available endpoints, request parameters, and response formats for accessing bus timing information.
+The `RTA Dubai Bus Journey Planner API <https://www.rta.ae/wps/portal/rta/ae/public-transport/journeyplanner>`_ provides access to real-time bus schedules and timetables for Dubai's public transportation system. This documentation outlines the available endpoints, request parameters, and response formats for accessing bus timing information.
 
 Retrieves the timetable for a specific bus route.
 
