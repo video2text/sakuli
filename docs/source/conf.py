@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'RTA Dubai API'
+project = 'France Bus API'
 copyright = '2024, Patrick'
-author = 'Patrick'
+author = 'Bastien Charrier'
 
 release = '0.1'
 version = '0.1.0'
