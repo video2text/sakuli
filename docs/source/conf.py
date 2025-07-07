@@ -3,7 +3,7 @@
 # -- Project information
 
 project = 'France Bus API'
-copyright = '2024, Patrick'
+copyright = '2025, Bastien Charrier'
 author = 'Bastien Charrier'
 
 release = '0.1'
