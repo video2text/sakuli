@@ -189,12 +189,12 @@ Additional References
 
 .. toctree::
    :maxdepth: 2
-   :caption: Quick Start
+   :caption: Fetch and Filter
 
    practical-use/how-to-fetch-and-filter-real-time-train-station-data
 
 .. toctree::
    :maxdepth: 2
-   :caption: Quick Start
+   :caption: Exporting
 
    practical-use/exporting-sncf-datasets-to-csv,-parquet,-and-gpx
