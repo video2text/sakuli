@@ -121,4 +121,4 @@ References
 
 - API Console: https://ressources.data.sncf.com/api/explore/v2.1/console
 - ODSQL Language Reference: https://docs.opendatasoft.com/en/data_exploration/04_analyzing_data/03_using_query_language.html
-- SNCF Dataset Portal: https://fr-documentation.readthedocs.io/en/latest/
+- SNCF Dataset Portal: https://ressources.data.sncf.com/pages/home/
