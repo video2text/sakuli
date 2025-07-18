@@ -186,3 +186,15 @@ Additional References
 - API Console: https://ressources.data.sncf.com/api/explore/v2.1/console
 - ODSQL Language Reference: https://docs.opendatasoft.com/en/data_exploration/04_analyzing_data/03_using_query_language.html
 - Horaires Bus: https://horairesbus.github.io/ — This community-driven website offers useful tools and examples for exploring French public transportation schedules. It can be a complementary resource when using the SNCF Open Data API.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Quick Start
+
+   practical-use/how-to-fetch-and-filter-real-time-train-station-data
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Quick Start
+
+   practical-use/exporting-sncf-datasets-to-csv,-parquet,-and-gpx
