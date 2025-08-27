@@ -1,200 +1,134 @@
-SNCF Open Data API Documentation
-================================
+Sakuli E2E Testing & Monitoring Documentation
+=============================================
 
-Version: v2.1  
-Base URL: https://ressources.data.sncf.com/api/explore/v2.1/catalog
+Version: Open Source  
+Base URL: https://sakuli.io
 
 Overview
 --------
-This API provides programmatic access to SNCF's open datasets. It allows you to query, filter, and export datasets via RESTful endpoints.
+Sakuli is an open platform for **UI testing, End-to-End (E2E) monitoring, and Robotic Process Automation (RPA)**.  
+It allows simulation of real user interactions on both web and native applications, forwarding results to monitoring systems like Prometheus, Icinga, or checkmk.
 
 Authentication
 --------------
-No authentication is required for public access.
+No authentication is required for using Sakuli locally.  
+Enterprise monitoring integration may require configuration (API tokens, system credentials).
 
-Main Endpoints
-==============
+Main Features
+=============
 
-GET /datasets/{dataset_id}/records
------------------------------------
-Query dataset records.
+UI Testing
+----------
+Automate regression, approval, and functional tests for web and native applications.
 
-**Path Parameters:**
+**Capabilities:**
+- Cross-browser support (Chrome, Firefox).
+- Simplified Selenium DSL (no more StaleElement errors).
+- DOM-based and screenshot-based interaction.
+- Drag & Drop, clipboard usage, auto-scroll, keyboard & mouse simulation.
 
-- ``dataset_id`` *(string, required)*: Identifier of the dataset.
+**Example Script:**
 
-**Query Parameters (optional):**
+.. code-block:: javascript
 
-- ``select``: Choose specific fields or compute expressions.
-- ``where``: Filter using Opendatasoft Query Language (ODSQL).
-- ``group_by``: Group results by a specific field or expression.
-- ``order_by``: Sort results (e.g., `order_by=name asc`).
-- ``limit`` *(integer)*: Max number of items to return (max 100 or 20,000 depending on grouping).
-- ``offset`` *(integer)*: Index of the first result (for pagination).
-- ``refine``: Filter using facet values (e.g., `refine=city:Paris`).
-- ``exclude``: Exclude specific facet values.
-- ``lang``: Language (default: "fr").
-- ``timezone``: Timezone for datetime fields (e.g., "UTC").
-- ``include_links`` *(boolean)*: Adds HATEOAS links if `true`.
-- ``include_app_metas`` *(boolean)*: Includes application metadata if `true`.
+   const { By } = require("sakuli/selenium");
 
-**Example Response:**
+   (async () => {
+     const driver = await startBrowser();
+     await driver.get("https://example.com");
+     const element = await driver.findElement(By.css(".login"));
+     await element.click();
+     console.log("Login button clicked!");
+   })();
 
-.. code-block:: json
+End-to-End Monitoring
+---------------------
+Integrate Sakuli tests with monitoring systems to detect performance or availability issues.
 
-   {
-     "total_count": 137611,
-     "results": [
-       {
-         "name": "Saint-Leu",
-         "coordinates": {
-           "lat": 46.7306,
-           "lon": 4.50083
-         },
-         "population": 29278,
-         ...
-       }
-     ]
-   }
+**Supported Forwarders:**
+- Prometheus
+- Icinga2 / checkmk
+- OMD (Nagios, Gearman)
+- ElasticSearch (coming soon)
+- SQL Databases (coming soon)
 
-GET /datasets/{dataset_id}/records/{record_id}
------------------------------------------------
-Fetch a single record from a dataset.
-
-**Path Parameters:**
-
-- ``dataset_id`` *(string, required)*
-- ``record_id`` *(string, required)*
-
-**Query Parameters (optional):** Same as in `/records`.
-
-GET /datasets/{dataset_id}/exports
------------------------------------
-List available export formats for a dataset.
-
-**Path Parameters:**
-
-- ``dataset_id`` *(string, required)*
-
-GET /datasets/{dataset_id}/exports/{format}
--------------------------------------------
-Export a dataset in the specified format.
-
-**Supported formats:**
-
-- ``csv``, ``parquet``, ``gpx``, etc.
-
-**Path Parameters:**
-
-- ``dataset_id`` *(string, required)*
-- ``format`` *(string, required)*
-
-**Query Parameters:**
-
-- Same as in `/records`, plus:
-- ``use_labels`` *(boolean)*: Output field labels instead of field names.
-- ``compressed`` *(boolean)*: Export as compressed (e.g., `.csv.gz`).
-- ``epsg`` *(integer)*: EPSG projection code for geometric exports.
-
-**Response:** Downloadable file in specified format.
-
-GET /datasets/{dataset_id}/facets
-----------------------------------
-List values for each facet (for filtering/navigation).
-
-**Query Parameters:**
-
-- Same as in `/records`, plus:
-- ``facet``: Field or facet expression (e.g., `facet=name` or `facet=facet(name="city", sort="-count")`).
-
-**Example Response:**
+**Example Monitoring Output (JSON):**
 
 .. code-block:: json
 
    {
-     "facets": [
-       {
-         "name": "timezone",
-         "facets": [
-           {
-             "name": "Europe",
-             "count": 68888
-           }
-         ]
-       }
-     ]
+     "testCase": "Login Workflow",
+     "status": "ERROR",
+     "executionTime": 12.8,
+     "message": "Timeout on login screen",
+     "timestamp": "2025-08-27T10:42:00Z"
    }
 
-GET /datasets/{dataset_id}/attachments
----------------------------------------
-List file attachments related to the dataset.
+Robotic Process Automation (RPA)
+--------------------------------
+Automate workflows and manual tasks across desktop and web apps.
 
-**Path Parameters:**
+**Example Use Case:**
+- Open Windows VM
+- Launch ticket system
+- Copy ticket ID to Excel
+- Validate customer email
 
-- ``dataset_id`` *(string, required)*
+Containerized Execution
+-----------------------
+Sakuli offers a **Docker image** for reproducible and scalable test runs.
 
-GET /datasets/{dataset_id}/exports/csv
----------------------------------------
-Export a dataset in CSV format with extra CSV-specific parameters.
+**Default Container Includes:**
+- Ubuntu OS + OpenBox desktop
+- Node.js runtime
+- Firefox & Chromium browsers
+- VNC & noVNC for live debugging
 
-**Additional CSV Parameters:**
-
-- ``delimit``: Field delimiter (e.g., `;`).
-- ``list_separator``: Separator for multivalue fields (e.g., `,`).
-- ``quote_all`` *(boolean)*: Quote all fields if `true`.
-- ``with_bom`` *(boolean)*: Add BOM for Excel compatibility (default `true` in v2.1).
-
-GET /datasets/{dataset_id}/exports/parquet
--------------------------------------------
-Export a dataset in Parquet format.
-
-**Additional Parquet Parameter:**
-
-- ``parquet_compression``: Compression type (e.g., `snappy`).
-
-GET /datasets/{dataset_id}/exports/gpx
----------------------------------------
-Export a dataset in GPX format (for geographic data).
-
-**Additional GPX Parameters:**
-
-- ``name_field``: Field to use as GPX `name`.
-- ``description_field_list``: Fields used for GPX `description`.
-- ``use_extension`` *(boolean)*: Use `<extension>` tag (default: `true` in v2.1).
+**Benefits:**
+- Same clean environment on each run
+- Parallel test execution
+- Integration with Kubernetes/OpenShift
 
 Response Codes
 ==============
 
-- **200 OK**: Successful request.
-- **400 Bad Request**: Invalid ODSQL query or parameters.
-- **401 Unauthorized**: Authentication required.
-- **429 Too Many Requests**: Rate limit exceeded.
-- **500 Internal Server Error**: Server error.
+When integrated with monitoring APIs, Sakuli returns standard statuses:
 
-**Example Error Response:**
+- **200 OK**: Test executed successfully.  
+- **400 Bad Request**: Invalid test configuration.  
+- **408 Timeout**: Application response too slow.  
+- **500 Internal Error**: Test execution failure.  
+
+**Example Error Response (JSON):**
 
 .. code-block:: json
 
    {
-     "message": "ODSQL query is malformed: invalid_function()",
-     "error_code": "ODSQLError"
+     "testCase": "Checkout Process",
+     "status": "FAILED",
+     "message": "Element #submit not found",
+     "error_code": "NoSuchElementError"
    }
+
+Runs On
+=======
+
+- Windows 10+  
+- macOS 10.10+  
+- Ubuntu 16.04+  
+- OpenShift / Kubernetes  
+- AWS, Azure, Google Cloud  
 
 Additional References
 =====================
 
-- API Console: https://ressources.data.sncf.com/api/explore/v2.1/console
-- ODSQL Language Reference: https://docs.opendatasoft.com/en/data_exploration/04_analyzing_data/03_using_query_language.html
-- Horaires Bus: https://horairesbus.github.io/ — This community-driven website offers useful tools and examples for exploring French public transportation schedules. It can be a complementary resource when using the SNCF Open Data API.
+- Official Website: https://sakuli.io  
+- GitHub Repository: https://github.com/sakuli  
+- Documentation: https://sakuli.io/docs  
+- Docker Hub Images: https://hub.docker.com/r/sakuli/sakuli  
 
 .. toctree::
    :maxdepth: 2
    :caption: Fetch and Filter
 
    practical-use/how-to-fetch-and-filter-real-time-train-station-data
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Exporting
-
-   practical-use/exporting-sncf-datasets-to-csv,-parquet,-and-gpx
