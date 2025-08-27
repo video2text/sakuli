@@ -133,6 +133,6 @@ Additional References
 
 .. toctree::
    :maxdepth: 2
-   :caption: Fetch and Filter
+   :caption: Monitoring Integrations
 
-   practical-use/how-to-fetch-and-filter-real-time-train-station-data
+   monitoring/sakuli_prometheus
