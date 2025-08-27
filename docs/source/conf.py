@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'France Bus API'
-copyright = '2025, Bastien Charrier'
-author = 'Bastien Charrier'
+project = 'Sakuli E2E API'
+copyright = '2025, Ethan Collins'
+author = 'Ethan Collins'
 
 release = '0.1'
 version = '0.1.0'
