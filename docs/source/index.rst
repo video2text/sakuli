@@ -23,9 +23,10 @@ UI Testing
 Automate regression, approval, and functional tests for web and native applications.
 
 **Capabilities:**
-- Cross-browser support (Chrome, Firefox).
-- Simplified Selenium DSL (no more StaleElement errors).
-- DOM-based and screenshot-based interaction.
+
+- Cross-browser support (Chrome, Firefox).  
+- Simplified Selenium DSL (no more StaleElement errors).  
+- DOM-based and screenshot-based interaction.  
 - Drag & Drop, clipboard usage, auto-scroll, keyboard & mouse simulation.
 
 **Example Script:**
@@ -47,10 +48,11 @@ End-to-End Monitoring
 Integrate Sakuli tests with monitoring systems to detect performance or availability issues.
 
 **Supported Forwarders:**
-- Prometheus
-- Icinga2 / checkmk
-- OMD (Nagios, Gearman)
-- ElasticSearch (coming soon)
+
+- Prometheus  
+- Icinga2 / checkmk  
+- OMD (Nagios, Gearman)  
+- ElasticSearch (coming soon)  
 - SQL Databases (coming soon)
 
 **Example Monitoring Output (JSON):**
@@ -70,9 +72,10 @@ Robotic Process Automation (RPA)
 Automate workflows and manual tasks across desktop and web apps.
 
 **Example Use Case:**
-- Open Windows VM
-- Launch ticket system
-- Copy ticket ID to Excel
+
+- Open Windows VM  
+- Launch ticket system  
+- Copy ticket ID to Excel  
 - Validate customer email
 
 Containerized Execution
@@ -80,14 +83,16 @@ Containerized Execution
 Sakuli offers a **Docker image** for reproducible and scalable test runs.
 
 **Default Container Includes:**
-- Ubuntu OS + OpenBox desktop
-- Node.js runtime
-- Firefox & Chromium browsers
+
+- Ubuntu OS + OpenBox desktop  
+- Node.js runtime  
+- Firefox & Chromium browsers  
 - VNC & noVNC for live debugging
 
 **Benefits:**
-- Same clean environment on each run
-- Parallel test execution
+
+- Same clean environment on each run  
+- Parallel test execution  
 - Integration with Kubernetes/OpenShift
 
 Response Codes
