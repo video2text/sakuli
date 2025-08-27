@@ -2,6 +2,7 @@ Sakuli E2E Testing & Monitoring Documentation
 =============================================
 
 Version: Open Source  
+
 Base URL: https://sakuli.io
 
 Overview
