@@ -129,9 +129,7 @@ Additional References
 =====================
 
 - Official Website: https://sakuli.io  
-- GitHub Repository: https://github.com/sakuli  
 - Documentation: https://sakuli.io/docs  
-- Docker Hub Images: https://hub.docker.com/r/sakuli/sakuli  
 
 .. toctree::
    :maxdepth: 2
